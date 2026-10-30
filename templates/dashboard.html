@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dashboard 📊</h1>
+
+<div class="cards">
+  <div class="card">
+    <h3>Total</h3>
+    <p>₹{{ "%.2f"|format(stats.total) }}</p>
+  </div>
+  <div class="card">
+    <h3>Average</h3>
+    <p>₹{{ "%.2f"|format(stats.average) }}</p>
+  </div>
+  <div class="card">
+    <h3>Median</h3>
+    <p>₹{{ "%.2f"|format(stats.median) }}</p>
+  </div>
+  <div class="card">
+    <h3>Highest</h3>
+    <p>₹{{ "%.2f"|format(stats.highest) }}</p>
+  </div>
+  <div class="card">
+    <h3>Lowest</h3>
+    <p>₹{{ "%.2f"|format(stats.lowest) }}</p>
+  </div>
+  <div class="card">
+    <h3>Std Deviation</h3>
+    <p>₹{{ "%.2f"|format(stats.std) }}</p>
+  </div>
+</div>
+
+<p class="highlight">You spend the most on <strong>{{ top_category }}</strong>.</p>
+
+<div class="two-columns">
+  <div>
+    <h2>By Category</h2>
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>Total</th>
+      </tr>
+      {% for row in category_table %}
+      <tr>
+        <td>{{ row.category }}</td>
+        <td>₹{{ "%.2f"|format(row.amount) }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div>
+    <h2>By Month</h2>
+    <table>
+      <tr>
+        <th>Month</th>
+        <th>Total</th>
+      </tr>
+      {% for row in monthly_table %}
+      <tr>
+        <td>{{ row.month }}</td>
+        <td>₹{{ "%.2f"|format(row.amount) }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<h2>Charts</h2>
+<div class="charts">
+  <img src="{{ url_for('static', filename='charts/pie.png') }}?v={{ version }}">
+  <img src="{{ url_for('static', filename='charts/bar.png') }}?v={{ version }}">
+  <img src="{{ url_for('static', filename='charts/line.png') }}?v={{ version }}">
+  <img src="{{ url_for('static', filename='charts/hist.png') }}?v={{ version }}">
+  <img src="{{ url_for('static', filename='charts/box.png') }}?v={{ version }}">
+</div>
+{% endblock %}

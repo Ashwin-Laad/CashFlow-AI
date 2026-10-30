@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Import Expenses from CSV</h1>
+<p>Your CSV file must have these columns (in this order):</p>
+<pre>date,category,amount,description
+2026-10-01,Food,250,Lunch</pre>
+
+<form method="POST" enctype="multipart/form-data" class="form">
+  <input type="file" name="file" accept=".csv">
+  <button type="submit">Upload</button>
+</form>
+{% endblock %}

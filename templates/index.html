@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Welcome </h1>
+<p>Track your daily spending and see where your money goes.</p>
+
+<div class="cards">
+  <div class="card">
+    <h3>Total Spent</h3>
+    <p>₹{{ "%.2f"|format(total) }}</p>
+  </div>
+  <div class="card">
+    <h3>Number of Expenses</h3>
+    <p>{{ count }}</p>
+  </div>
+</div>
+
+<h2>Recent Expenses</h2>
+{% if recent %}
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Category</th>
+    <th>Amount</th>
+    <th>Description</th>
+  </tr>
+  {% for e in recent %}
+  <tr>
+    <td>{{ e.date }}</td>
+    <td>{{ e.category }}</td>
+    <td>₹{{ "%.2f"|format(e.amount) }}</td>
+    <td>{{ e.description }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No expenses yet. <a href="{{ url_for('add_expense') }}">Add your first one</a>.</p>
+{% endif %}
+{% endblock %}
